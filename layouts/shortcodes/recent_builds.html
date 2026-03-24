@@ -4,10 +4,10 @@
       <h2 class="display-6 fw-bold mb-0">Recent User Builds</h2>
       <p class="mt-2 mb-0 text-muted">Check out what the community is building</p>
     </div>
-    <a href="builds/" class="btn btn-outline-primary rounded-pill px-4">See All</a>
+    <a href="{{ "builds/" | relURL }}" class="btn btn-outline-primary rounded-pill px-4">See All</a>
   </div>
   <div class="row g-4">
-    {{ $builds := where .Site.RegularPages "Section" "builds" }}
+    {{ $builds := where .Site.RegularPages.ByDate.Reverse "Section" "builds" }}
     {{ if $builds }}
       {{ range first 3 $builds }}
       <div class="col-md-4">

@@ -16,7 +16,21 @@
               <a href="{{ .Permalink }}" class="text-decoration-none" style="color: inherit;">{{ .Title }}</a>
             </h2>
             
-            {{ $ics := printf "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:%s\nDTSTART:%s\nDTEND:%s\nURL:%s\nDESCRIPTION:View full event details at: %s\nEND:VEVENT\nEND:VCALENDAR" .Title (.Date.Format "20060102T090000") (.Date.AddDate 0 0 1 | time.Format "20060102T090000") .Permalink .Permalink }}
+            {{/* Escape SUMMARY (title) for ICS: backslash, semicolon, comma, newline */}}
+            {{ $summary := .Title | replace "\\" "\\\\" | replace ";" "\\;" | replace "," "\\," | replaceRE "\r?\n" "\\n" }}
+            {{/* Use permalink as UID source, escaped for ICS */}}
+            {{ $uidRaw := .Permalink }}
+            {{ $uid := $uidRaw | replace "\\" "\\\\" | replace ";" "\\;" | replace "," "\\," | replaceRE "\r?\n" "\\n" }}
+            {{/* DESCRIPTION with URL, escaped for ICS */}}
+            {{ $descriptionRaw := printf "View full event details at: %s" .Permalink }}
+            {{ $description := $descriptionRaw | replace "\\" "\\\\" | replace ";" "\\;" | replace "," "\\," | replaceRE "\r?\n" "\\n" }}
+            {{/* Event start/end using actual time; DTEND kept as +1 day like before */}}
+            {{ $dtstart := .Date.Format "20060102T150405" }}
+            {{ $dtend := .Date.AddDate 0 0 1 | time.Format "20060102T150405" }}
+            {{/* DTSTAMP in UTC as required by RFC 5545 */}}
+            {{ $dtstamp := now.UTC.Format "20060102T150405Z" }}
+            {{/* Build ICS with CRLF line endings */}}
+            {{ $ics := printf "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//%s//EN\r\nBEGIN:VEVENT\r\nUID:%s\r\nDTSTAMP:%s\r\nSUMMARY:%s\r\nDTSTART:%s\r\nDTEND:%s\r\nURL:%s\r\nDESCRIPTION:%s\r\nEND:VEVENT\r\nEND:VCALENDAR" .Site.Title $uid $dtstamp $summary $dtstart $dtend .Permalink $description }}
             {{ $icsDataUri := printf "data:text/calendar;charset=utf8,%s" ($ics | urlquery | replaceRE "\\+" "%20") }}
 
             <p class="small mb-4">

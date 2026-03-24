@@ -157,7 +157,7 @@ title: Central Valley Mesh
 <div class="hero-section">
   <div id="tsparticles"></div>
   <div class="hero-content">
-    <img src="central-valley-mesh.png" alt="Central Valley Mesh Logo" style="width:160px; margin-bottom: 1.5rem; filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.15));">
+    <img src="/images/central-valley-mesh.png" alt="Central Valley Mesh Logo" style="width:160px; margin-bottom: 1.5rem; filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.15));">
     <h1 class="home_header">Central Valley Mesh<br /><span style="font-size:1.6rem; font-weight:400; color:#cbd5e1; -webkit-text-fill-color: #cbd5e1;">A Meshtastic Community Site</span></h1>
     <p class="lead mb-4" style="color:#e2e8f0; font-size: 1.1rem;">Building the communication network of tomorrow, together in the Central Valley.</p>
     

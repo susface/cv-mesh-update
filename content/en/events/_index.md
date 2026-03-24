@@ -1,7 +1,7 @@
 ---
 title: Events
 menu: {main: {weight: 40}}
-type: blog
+type: events
 ---
 
 Welcome to the **Community Events** section! 
