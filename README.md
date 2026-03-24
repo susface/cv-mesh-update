@@ -10,6 +10,3 @@ To make changes to this site, please submit a PR.
 
 For administration assistance, please connect with us in our [Discord Community](https://discord.gg/9KUu5QQqMx) in the website channel.
 
-# update stuff
-
-i have added a new anitmated background to the background of all major tabs or sections and i remade the homepage to have more information and a embedded node map. also a new tab called events was amde for when we do have events like the balloon one with a example event already in there, as it is now this should bring the site up to the modern day
